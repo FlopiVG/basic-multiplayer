@@ -1,7 +1,11 @@
-const express = require("express");
+import * as express from "express";
+import * as socketIo from "socket.io";
+import { createServer, Server } from "http";
+
 const app = express();
-const server = require("http").Server(app);
-const io = require("socket.io").listen(server);
+const server = createServer(app);
+const io = socketIo(server);
+const PORT = process.env.PORT || 8080;
 
 const players = {};
 const star = {
@@ -13,14 +17,14 @@ const scores = {
   red: 0
 };
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/../public"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "index.html");
+  res.sendFile("index.html");
 });
 
-server.listen(8080, () => {
-  console.log("Listen on " + server.address().port);
+server.listen(PORT, () => {
+  console.log("Listen on " + PORT);
 });
 
 io.on("connection", socket => {
