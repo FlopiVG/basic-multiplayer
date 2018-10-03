@@ -32,12 +32,10 @@ function create() {
   this.cursors = this.input.keyboard.createCursorKeys();
 
   this.socket.on("currentPlayers", players => {
-    Object.keys(players).forEach(id => {
-      if (players[id].playerId === self.socket.id) {
-        addPlayer(self, players[id]);
-      } else {
-        addOtherPlayers(self, players[id]);
-      }
+    players.forEach(player => {
+      player.playerId === self.socket.id
+        ? addPlayer(self, player)
+        : addOtherPlayers(self, player);
     });
   });
 
@@ -72,8 +70,12 @@ function create() {
   });
 
   this.socket.on("scoreUpdate", scores => {
-    self.blueScoreText.setText("Blue: " + scores.blue);
-    self.redScoreText.setText("Red: " + scores.red);
+    self.blueScoreText.setText(
+      "Blue: " + scores.find(s => s.team === "blue").quantity
+    );
+    self.redScoreText.setText(
+      "Red: " + scores.find(s => s.team === "red").quantity
+    );
   });
 
   this.socket.on("starLocation", starLocation => {
