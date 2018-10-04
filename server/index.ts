@@ -4,14 +4,14 @@ import { createServer } from "http";
 import { attachControllers } from "@decorators/socket";
 import ShipController from "./Ship";
 
+const PORT = process.env.PORT || 8080;
+
 class App {
-  PORT: number | string;
   app;
   server;
   io: SocketIO.Server;
 
   constructor() {
-    this.PORT = process.env.PORT || 8080;
     this.app = express();
     this.server = createServer(this.app);
     this.io = socketIo(this.server);
@@ -19,8 +19,8 @@ class App {
     this.configure();
     attachControllers(this.io, [ShipController]);
 
-    this.server.listen(this.PORT, () => {
-      console.log("Listen on " + this.PORT);
+    this.server.listen(PORT, () => {
+      console.log("Listen on " + PORT);
     });
   }
 
