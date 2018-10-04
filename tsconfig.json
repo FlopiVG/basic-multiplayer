@@ -2,7 +2,9 @@
   "compilerOptions": {
     "module": "commonjs",
     "sourceMap": true,
-    "lib": ["esnext"]
+    "lib": ["esnext"],
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["server/**/*.ts"],
   "exclude": ["node_modules"]

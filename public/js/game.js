@@ -52,7 +52,7 @@ function create() {
     });
   });
 
-  this.socket.on("disconnect", playerId => {
+  this.socket.on("userDisconnect", playerId => {
     self.otherPlayers.getChildren().forEach(otherPlayer => {
       if (playerId === otherPlayer.playerId) {
         otherPlayer.destroy();
