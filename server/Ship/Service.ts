@@ -1,12 +1,12 @@
 import { Injectable } from "@decorators/di";
-import { IPlayer } from "../interfaces/IPlayer";
-import { IStar } from "../interfaces/IStar";
-import { IScore } from "../interfaces/IScore";
+import { IPlayer } from "./interfaces/IPlayer";
+import { IStar } from "./interfaces/IStar";
+import { IScore } from "./interfaces/IScore";
 
 const GET_STAR_SCORE = 10;
 
 @Injectable()
-export class ShipGameService {
+export class ShipService {
   private players: IPlayer[] = [];
   private scores: IScore[] = [
     { team: "blue", quantity: 0 },
