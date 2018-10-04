@@ -2,7 +2,7 @@ import * as express from "express";
 import * as socketIo from "socket.io";
 import { createServer } from "http";
 import { attachControllers } from "@decorators/socket";
-import { GameSocket } from "./Socket";
+import { ShipGameController } from "./ShipGame/Controller";
 
 class App {
   PORT: number | string;
@@ -17,7 +17,7 @@ class App {
     this.io = socketIo(this.server);
 
     this.configure();
-    attachControllers(this.io, [GameSocket]);
+    attachControllers(this.io, [ShipGameController]);
 
     this.server.listen(this.PORT, () => {
       console.log("Listen on " + this.PORT);
