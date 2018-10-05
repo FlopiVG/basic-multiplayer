@@ -1,7 +1,9 @@
 import "jest";
 
-import {App} from "../index";
+import { App } from "../index";
 
 describe("Server test suite", () => {
-  test("Dummy test", () => {});
+  test("The app starts without errors", () => {
+    new App();
+  });
 });

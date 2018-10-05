@@ -4,7 +4,7 @@ import { createServer } from "http";
 import { attachControllers } from "@decorators/socket";
 import ShipController from "./Ship";
 
-const PORT = process.env.PORT || 8080;
+const PORT = (process.env.NODE_ENV === "test") ? 33333 : process.env.PORT || 8080;
 
 export class App {
   app;
