@@ -6,7 +6,7 @@ import ShipController from "./Ship";
 
 const PORT = process.env.PORT || 8080;
 
-class App {
+export class App {
   app;
   server;
   io: SocketIO.Server;
