@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node server",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "test": "jest"
   },
   "author": "",
   "license": "ISC",
@@ -16,10 +17,32 @@
   },
   "devDependencies": {
     "@decorators/di": "^1.0.2",
+    "@types/jest": "^23.3.3",
     "@types/node": "^10.11.3",
     "@types/socket.io": "^1.4.38",
+    "@types/supertest": "^2.0.6",
+    "jest": "^23.6.0",
     "nodemon": "^1.18.4",
+    "supertest": "^3.3.0",
+    "ts-jest": "^23.10.3",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "server/**/*.{ts,tsx}"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testMatch": [
+      "**/__tests__/**/*.(ts|js|tsx|jsx)",
+      "**/?(*.)(spec|test).ts?(x)"
+    ],
+    "testEnvironment": "node"
   }
 }
