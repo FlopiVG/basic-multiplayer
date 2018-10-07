@@ -42,7 +42,12 @@ export class App {
 
     const compiler = webpack(webpackConfig);
 
-    this.app.use(webpackDevMiddleware(compiler));
+    this.app.use(
+      webpackDevMiddleware(compiler, {
+        writeToDisk: true,
+        stats: false
+      })
+    );
     this.app.use(webpackHotMiddleware(compiler));
   }
 }

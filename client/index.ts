@@ -1,9 +1,3 @@
-class TestApp {
-  private readonly foo: string = "foo";
+const foo: string = "fooo";
 
-  constructor() {
-    console.log(this.foo);
-  }
-}
-
-new TestApp();
+console.log(foo);
