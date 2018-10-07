@@ -13,7 +13,10 @@
   "dependencies": {
     "@decorators/socket": "^3.1.0",
     "express": "^4.16.3",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "webpack": "^4.20.2",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.2"
   },
   "devDependencies": {
     "@decorators/di": "^1.0.2",
@@ -25,6 +28,7 @@
     "nodemon": "^1.18.4",
     "supertest": "^3.3.0",
     "ts-jest": "^23.10.3",
+    "ts-loader": "^5.2.1",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.1"
   },

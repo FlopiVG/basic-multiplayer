@@ -16,6 +16,7 @@ export class App {
     this.server = createServer(this.app);
     this.io = socketIo(this.server);
 
+    this.configureDev();
     this.configure();
     attachControllers(this.io, [ShipController]);
   }
@@ -31,5 +32,17 @@ export class App {
     this.app.get("/", (req, res) => {
       res.sendFile("index.html");
     });
+  }
+
+  private async configureDev(): Promise<void> {
+    const webpack = await import("webpack");
+    const webpackConfig = await import("../webpack.config");
+    const webpackDevMiddleware = await import("webpack-dev-middleware");
+    const webpackHotMiddleware = await import("webpack-hot-middleware");
+
+    const compiler = webpack(webpackConfig);
+
+    this.app.use(webpackDevMiddleware(compiler));
+    this.app.use(webpackHotMiddleware(compiler));
   }
 }
