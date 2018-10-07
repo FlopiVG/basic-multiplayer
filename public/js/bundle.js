@@ -64,7 +64,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "ab1fef31a5d4a1f48958";
+/******/ 	var hotCurrentHash = "1e231a08b645304e29fc";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -801,7 +801,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("var foo = \"fooo\";\r\nconsole.log(foo);\r\n\n\n//# sourceURL=webpack:///./client/index.ts?");
+eval("var foo = \"foo\";\r\nconsole.log(foo);\r\n\n\n//# sourceURL=webpack:///./client/index.ts?");
 
 /***/ }),
 
