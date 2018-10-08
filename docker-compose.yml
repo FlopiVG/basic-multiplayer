@@ -1,0 +1,11 @@
+version: '3.2'
+services:
+  app:
+    container_name: basic-multi 
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - '/usr/src/app/node_modules'
+    ports:
+      - '8080:8080'
