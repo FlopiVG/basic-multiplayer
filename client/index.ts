@@ -1,3 +1,3 @@
-const foo: string = "foo";
+import { Game } from "./Game";
 
-console.log(foo);
+new Game();

@@ -1,5 +1,6 @@
 import * as path from "path";
 import * as webpack from "webpack";
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 module.exports = {
   entry: [
@@ -19,5 +20,8 @@ module.exports = {
   resolve: {
     extensions: [".ts", ".js"]
   },
-  plugins: [new webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    /* new TsconfigPathsPlugin({ baseUrl: "./tsconfig.json" }) */
+  ]
 };

@@ -4,8 +4,9 @@
     "sourceMap": true,
     "lib": ["esnext"],
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "baseUrl": "./client"
   },
-  "include": ["server/**/*.ts"],
+  "include": ["server/**/*.ts", "client/**/*.ts"],
   "exclude": ["node_modules"]
 }
