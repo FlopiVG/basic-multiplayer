@@ -34,14 +34,13 @@ export class MainGame extends Phaser.Scene {
   }
 
   public create(): void {
-    const self = this;
     this.socket = io();
     this.otherPlayers = this.physics.add.group();
     this.cursors = this.input.keyboard.createCursorKeys();
 
     this.socket.on("currentPlayers", players => {
       players.forEach(player => {
-        player.playerId === self.socket.id
+        player.playerId === this.socket.id
           ? this.addPlayer(player)
           : this.addOtherPlayers(player);
       });
@@ -52,7 +51,7 @@ export class MainGame extends Phaser.Scene {
     });
 
     this.socket.on("playerMoved", playerInfo => {
-      self.otherPlayers.getChildren().forEach((otherPlayer: IShip) => {
+      this.otherPlayers.getChildren().forEach((otherPlayer: IShip) => {
         if (playerInfo.playerId === otherPlayer.playerId) {
           otherPlayer.setRotation(playerInfo.rotation);
           otherPlayer.setPosition(playerInfo.x, playerInfo.y);
@@ -61,7 +60,7 @@ export class MainGame extends Phaser.Scene {
     });
 
     this.socket.on("userDisconnect", playerId => {
-      self.otherPlayers.getChildren().forEach((otherPlayer: IOtherShip) => {
+      this.otherPlayers.getChildren().forEach((otherPlayer: IOtherShip) => {
         if (playerId === otherPlayer.playerId) {
           otherPlayer.destroy();
         }
@@ -78,29 +77,29 @@ export class MainGame extends Phaser.Scene {
     });
 
     this.socket.on("scoreUpdate", scores => {
-      self.blueScoreText.setText(
+      this.blueScoreText.setText(
         "Blue: " + scores.find(s => s.team === "blue").quantity
       );
-      self.redScoreText.setText(
+      this.redScoreText.setText(
         "Red: " + scores.find(s => s.team === "red").quantity
       );
     });
 
     this.socket.on("starLocation", starLocation => {
-      if (self.star) self.star.destroy();
-      self.star = self.physics.add.image(
+      if (this.star) this.star.destroy();
+      this.star = this.physics.add.image(
         starLocation.x,
         starLocation.y,
         "star"
       );
-      self.physics.add.overlap(
-        self.ship,
-        self.star,
+      this.physics.add.overlap(
+        this.ship,
+        this.star,
         () => {
           this.socket.emit("starCollected");
         },
         null,
-        self
+        this
       );
     });
   }
