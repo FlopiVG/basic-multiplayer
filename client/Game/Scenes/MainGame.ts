@@ -1,5 +1,6 @@
 import * as io from "socket.io-client";
 import * as Phaser from "phaser";
+import { ScoreView } from "../views/Score";
 
 interface IShip extends Phaser.Physics.Arcade.Image {
   playerId?: string;
@@ -18,10 +19,9 @@ export class MainGame extends Phaser.Scene {
   private socket: SocketIO.Socket;
   private otherPlayers: Phaser.Physics.Arcade.Group;
   private cursors: Phaser.Input.Keyboard.CursorKeys;
-  private blueScoreText: Phaser.GameObjects.Text;
-  private redScoreText: Phaser.GameObjects.Text;
   private ship: IShip | any;
   private star: Phaser.Physics.Arcade.Image;
+  private scoreView: ScoreView;
 
   constructor() {
     super({ key: "MainGame" });
@@ -35,6 +35,10 @@ export class MainGame extends Phaser.Scene {
 
   public create(): void {
     this.socket = io();
+
+    this.scoreView = new ScoreView(this);
+    this.add.existing(this.scoreView);
+
     this.otherPlayers = this.physics.add.group();
     this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -67,23 +71,7 @@ export class MainGame extends Phaser.Scene {
       });
     });
 
-    this.blueScoreText = this.add.text(16, 16, "", {
-      fontSize: "32px",
-      fill: "#0000FF"
-    });
-    this.redScoreText = this.add.text(584, 16, "", {
-      fontSize: "32px",
-      fill: "#FF0000"
-    });
-
-    this.socket.on("scoreUpdate", scores => {
-      this.blueScoreText.setText(
-        "Blue: " + scores.find(s => s.team === "blue").quantity
-      );
-      this.redScoreText.setText(
-        "Red: " + scores.find(s => s.team === "red").quantity
-      );
-    });
+    this.socket.on("scoreUpdate", this.scoreView.scoreUpdate);
 
     this.socket.on("starLocation", starLocation => {
       if (this.star) this.star.destroy();

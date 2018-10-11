@@ -1,5 +1,5 @@
 import * as Phaser from "phaser";
-import { MainGame } from "./Scenes/MainGame";
+import { MainGame } from "./scenes/MainGame";
 
 export class Game extends Phaser.Game {
   constructor() {
