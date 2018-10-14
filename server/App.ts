@@ -26,10 +26,34 @@ export class App {
     });
   }
 
-  private configure(): void {
+  private async configure(): Promise<void> {
+    await this.configureDev();
+
     this.app.use(express.static(__dirname + "/../public"));
     this.app.get("/", (req, res) => {
       res.sendFile("index.html");
     });
+
+    this.start();
+  }
+
+  private async configureDev(): Promise<void> {
+    const webpack = await import("webpack");
+    const webpackConfig = await import("../webpack.config");
+    const webpackDevMiddleware = await import("webpack-dev-middleware");
+    const webpackHotMiddleware = await import("webpack-hot-middleware");
+    const rimraf = await import("rimraf");
+
+    rimraf.sync(__dirname + "/../public/js/.hot");
+
+    const compiler = webpack(webpackConfig);
+
+    this.app.use(
+      webpackDevMiddleware(compiler, {
+        writeToDisk: true,
+        stats: false
+      })
+    );
+    this.app.use(webpackHotMiddleware(compiler));
   }
 }

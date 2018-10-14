@@ -1,5 +1,5 @@
 {
-  "watch": ["server", "public/js"],
+  "watch": ["server"],
   "ext": "ts, js",
   "exec": "npm start"
 }
